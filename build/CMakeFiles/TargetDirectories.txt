@@ -1,0 +1,3 @@
+/home/aseppp/Desktop/grafikkomputer/RoomSimulation3D/build/CMakeFiles/RoomSimulation3D.dir
+/home/aseppp/Desktop/grafikkomputer/RoomSimulation3D/build/CMakeFiles/edit_cache.dir
+/home/aseppp/Desktop/grafikkomputer/RoomSimulation3D/build/CMakeFiles/rebuild_cache.dir
