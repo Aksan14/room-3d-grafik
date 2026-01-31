@@ -35,9 +35,17 @@ if(WIN32)
         link_directories(${CMAKE_SOURCE_DIR}/lib/glfw/lib-vc2022)
         set(GLFW_LIB glfw3)
     else()
-        # MinGW
-        link_directories(${CMAKE_SOURCE_DIR}/lib/glfw/lib-mingw-w64)
-        set(GLFW_LIB libglfw3.a)
+        # MinGW - gunakan path absolut ke library
+        set(GLFW_LIB_PATH ${CMAKE_SOURCE_DIR}/lib/glfw/lib-mingw-w64)
+        link_directories(${GLFW_LIB_PATH})
+        
+        # Cek apakah libglfw3.a ada
+        if(EXISTS "${GLFW_LIB_PATH}/libglfw3.a")
+            set(GLFW_LIB ${GLFW_LIB_PATH}/libglfw3.a)
+            message(STATUS "GLFW Library: ${GLFW_LIB}")
+        else()
+            message(FATAL_ERROR "GLFW library not found at ${GLFW_LIB_PATH}/libglfw3.a")
+        endif()
     endif()
     
     # Buat executable
@@ -52,11 +60,12 @@ if(WIN32)
     else()
         # MinGW membutuhkan library tambahan
         target_link_libraries(${PROJECT_NAME}
-            OpenGL::GL
             ${GLFW_LIB}
+            opengl32
             gdi32
             user32
             kernel32
+            winmm
         )
     endif()
     
